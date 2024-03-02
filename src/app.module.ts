@@ -1,13 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ImageController } from './domain/image/image.controller';
-import { ImageService } from './domain/image/image.service';
-import { ImageModule } from './domain/image/image.module';
+import { ImagesModule } from './domain/images/images.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [ImageModule],
-  controllers: [AppController, ImageController],
-  providers: [AppService, ImageService],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), ImagesModule],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
