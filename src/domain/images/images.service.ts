@@ -23,6 +23,6 @@ export class ImagesService {
       imageUrlArr.push(imageUrl);
     }
 
-    return { imageUrlArr };
+    return imageUrlArr;
   }
 }
