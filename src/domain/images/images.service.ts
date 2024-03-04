@@ -4,15 +4,16 @@ import { client, createImageUrl } from 'src/aws/s3.config';
 
 @Injectable()
 export class ImagesService {
-  async uploadImages(files: Express.Multer.File[]) {
+  async uploadImages(images) {
     const imageUrlArr = [];
 
-    for (const file of files) {
-      const key = `${Date.now().toString()}-${file.originalname}`;
+    for (const image of images) {
+      const key = `${Date.now().toString()}-${image.originalname}`;
+      const buffer = Buffer.from(image.buffer, 'utf8');
 
       const uploadCommand = new PutObjectCommand({
         Key: key,
-        Body: file.buffer,
+        Body: buffer,
         Bucket: process.env.S3_BUCKET_NAME,
       });
 
@@ -22,6 +23,6 @@ export class ImagesService {
       imageUrlArr.push(imageUrl);
     }
 
-    return imageUrlArr;
+    return { imageUrlArr };
   }
 }

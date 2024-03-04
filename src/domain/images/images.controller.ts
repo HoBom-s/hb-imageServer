@@ -1,19 +1,12 @@
-import {
-  Controller,
-  Post,
-  UploadedFiles,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { FilesInterceptor } from '@nestjs/platform-express';
 
 @Controller('images')
 export class ImagesController {
   constructor(private imagesService: ImagesService) {}
 
   @Post()
-  @UseInterceptors(FilesInterceptor('thumbnail'))
-  async uploadImages(@UploadedFiles() files: Express.Multer.File[]) {
-    return this.imagesService.uploadImages(files);
+  async uploadImages(@Body() images) {
+    return this.imagesService.uploadImages(images);
   }
 }
