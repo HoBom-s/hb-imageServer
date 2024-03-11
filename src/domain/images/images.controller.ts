@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
@@ -24,5 +26,14 @@ export class ImagesController {
         'Error(ImageServer): Request body missing. Please provide the necessary data in the request body.',
       );
     return this.imagesService.uploadImages(images);
+  }
+
+  @Delete()
+  removeImage(@Param() id: string) {
+    if (!id)
+      throw new BadRequestException(
+        'Error(ImageServer): Request parameter missing. Please provide the necessary data in the request params.',
+      );
+    return this.imagesService.removeImage(id);
   }
 }

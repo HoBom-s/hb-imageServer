@@ -29,4 +29,9 @@ export class ImagesService {
 
     return imageUrlArr;
   }
+
+  // WIP
+  removeImage(id: string) {
+    return `I'm gonna remove unused images: ${id}`;
+  }
 }
