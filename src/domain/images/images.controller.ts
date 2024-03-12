@@ -3,29 +3,34 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
   Param,
   Post,
 } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { ImagesBodyData } from 'src/types/image.type';
+import { MultipleImagesBodyData, OneImageBodyData } from 'src/types/image.type';
 
 @Controller('images')
 export class ImagesController {
   constructor(private imagesService: ImagesService) {}
 
-  @Get()
-  test() {
-    return 'test';
-  }
-
   @Post()
-  async uploadImages(@Body() images: ImagesBodyData) {
+  async uploadMultipleImages(@Body() images: MultipleImagesBodyData) {
     if (!images || !images.length)
       throw new BadRequestException(
-        'Error(ImageServer): Request body missing. Please provide the necessary data in the request body.',
+        'Error(ImageServer): Request body missing.',
       );
-    return this.imagesService.uploadImages(images);
+    return this.imagesService.uploadMultipleImages(images);
+  }
+
+  @Post('/thumbnail')
+  async uploadThumbnail(@Body() thumbnail: OneImageBodyData) {
+    if (!thumbnail)
+      throw new BadRequestException(
+        'Error(ImageServer): Request body missing.',
+      );
+
+    const bucketPath = process.env.S3_HBTB_THUMBNAIL_PATH;
+    return this.imagesService.uploadOneImage(thumbnail, bucketPath);
   }
 
   @Delete()
