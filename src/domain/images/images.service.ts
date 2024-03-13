@@ -1,12 +1,12 @@
 import { PutObjectCommand } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
 import { client, createImageUrl } from 'src/aws/s3.config';
-import { OneImageBodyData } from 'src/types/image.type';
+import { UploadOneImage } from 'src/types/image.type';
 
 @Injectable()
 export class ImagesService {
-  async uploadOneImage(image: OneImageBodyData, path: string) {
-    const key = `${path}/${Date.now().toString()}-${image.originalname}`;
+  async uploadOneImage(image: UploadOneImage, path: string) {
+    const key = `${path}/${Date.now().toString()}-${image.articlePath}`;
     const buffer = Buffer.from(image.buffer);
 
     const uploadCommand = new PutObjectCommand({
