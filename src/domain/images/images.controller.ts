@@ -13,15 +13,18 @@ export class ImagesController {
         'Error(ImageServer): Request body missing.',
       );
 
-    let { articlePath, buffer, path } = image;
-    const bucketPath = `${process.env.S3_HBTB_PATH}/${path}`;
+    let { uniqueString, buffer, path, ext } = image;
 
-    const isSlashIncluded = articlePath.startsWith('/');
-    if (isSlashIncluded) {
-      articlePath = articlePath.replace('/', '');
+    if (path === 'thumbnail') {
+      const isSlashIncluded = uniqueString.startsWith('/');
+      if (isSlashIncluded) {
+        uniqueString = uniqueString.replace('/', '');
+      }
     }
 
-    const imageInfo = { articlePath, buffer };
+    const bucketPath = `${process.env.S3_HBTB_PATH}/${path}`;
+
+    const imageInfo = { uniqueString, buffer, ext };
 
     return this.imagesService.uploadOneImage(imageInfo, bucketPath);
   }

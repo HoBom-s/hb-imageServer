@@ -1,14 +1,16 @@
 type Path = 'thumbnail' | 'profile';
 
 export interface OneImageBodyData {
-  articlePath: string;
+  uniqueString: string;
   buffer: Buffer;
   path: Path;
+  ext: string;
 }
 
 export interface UploadOneImage {
-  articlePath: string;
+  uniqueString: string;
   buffer: Buffer;
+  ext: string;
 }
 
 export type MultipleImagesBodyData = OneImageBodyData[];
