@@ -1,31 +1,38 @@
 import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
 import { ImagesService } from './images.service';
-import { OneImageBodyData } from 'src/types/image.type';
+import { UploadOneImageBodyData } from 'src/types/image.type';
 
 @Controller('images')
 export class ImagesController {
   constructor(private imagesService: ImagesService) {}
 
   @Post('single')
-  async uploadOneImage(@Body() image: OneImageBodyData) {
-    if (!image)
+  async uploadOneImage(@Body() imageInfo: UploadOneImageBodyData) {
+    if (!imageInfo)
       throw new BadRequestException(
         'Error(ImageServer): Request body missing.',
       );
 
-    let { uniqueString, buffer, path, ext } = image;
+    const { uniqueString, path, ext, buffer } = imageInfo;
 
+    let uniqueStringWithoutSlash: string;
     if (path === 'thumbnail') {
       const isSlashIncluded = uniqueString.startsWith('/');
       if (isSlashIncluded) {
-        uniqueString = uniqueString.replace('/', '');
+        uniqueStringWithoutSlash = uniqueString.replace('/', '');
       }
     }
 
-    const bucketPath = `${process.env.S3_HBTB_PATH}/${path}`;
+    return this.imagesService.uploadOneImage({
+      uniqueString: uniqueStringWithoutSlash,
+      path,
+      ext,
+      buffer,
+    });
+  }
 
-    const imageInfo = { uniqueString, buffer, ext };
-
-    return this.imagesService.uploadOneImage(imageInfo, bucketPath);
+  @Post('remove')
+  removeOneImage(@Body('imageKey') imageKey: string) {
+    return this.imagesService.removeOneImage(imageKey);
   }
 }

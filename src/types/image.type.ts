@@ -1,16 +1,16 @@
 type Path = 'thumbnail' | 'profile';
 
-export interface OneImageBodyData {
+export interface UploadOneImageBodyData {
   uniqueString: string;
   buffer: Buffer;
   path: Path;
   ext: string;
 }
 
-export interface UploadOneImage {
+export interface CreateObjectKey {
   uniqueString: string;
-  buffer: Buffer;
+  path: Path;
   ext: string;
 }
 
-export type MultipleImagesBodyData = OneImageBodyData[];
+export type MultipleImagesBodyData = UploadOneImageBodyData[];
