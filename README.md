@@ -1,73 +1,56 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# HoBom Image Server
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**호봄 프로젝트**는 '하고 싶은 개발'을 원없이 하기 위해 시작되었습니다.  
+**호봄 이미지 서버**는 호봄 서비스들에 들어가는 이미지를 처리합니다.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**HoBom project** is named after our initial, has begun to freely do all the development we want regardless of companies' technical limitation.  
+**HoBom Image Server** deal with all images from the HoBom services.
 
-## Description
+<br/>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 기술 스택(Tech Stack)
 
-## Installation
+`NodeJS` `NestJS` `AWS-S3`
+
+- WAS distribution on `Koyeb` free-tier
+
+<br/>
+
+## 시작하기(Getting started)
+
+Of course, `.env` on private note.
 
 ```bash
-$ npm install
+# Git clone
+git clone https://github.com/HoBom-s/hb-imageServer.git
+
+# start
+npm install
+npm run start
 ```
 
-## Running the app
+<br/>
 
-```bash
-# development
-$ npm run start
+## 기능(Features)
 
-# watch mode
-$ npm run start:dev
+**_※ 호봄 서비스 확장에 따라 이미지 처리 기능이 추가될 예정입니다._**  
+**_※ More features will be added as the Hobom service expands._**
 
-# production mode
-$ npm run start:prod
-```
+### Upload single image
 
-## Test
+- 버킷 단일 객체(이미지) 업로드 (ex. [호봄 테크 블로그](https://github.com/HoBom-s/hbtb-back-v2) 게시글 썸네일, 유저 프로필 이미지)  
+  Processing a single image from HoBom services. (ex. [HoBom Tech Blog](https://github.com/HoBom-s/hbtb-back-v2)'s thumbnails or profile images)
 
-```bash
-# unit tests
-$ npm run test
+### Remove one image
 
-# e2e tests
-$ npm run test:e2e
+- 버킷 단일 객체(이미지) 삭제
 
-# test coverage
-$ npm run test:cov
-```
+### Logging
 
-## Support
+- Using [winston](https://www.npmjs.com/package/winston), [winston-daily-rotate-file](https://www.npmjs.com/package/winston-daily-rotate-file), and [morgan](https://www.npmjs.com/package/morgan) for logging and tracking issues
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<br/>
 
-## Stay in touch
+## 문제 해결(TroubleShooting)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- **_...ing..._** WIP on Notion **_...ing..._**
